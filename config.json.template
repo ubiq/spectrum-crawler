@@ -1,0 +1,17 @@
+{
+  "mongodb": {
+    "user": "spectrum",
+    "password": "UBQ4Lyfe",
+    "database": "spectrum-api",
+    "address": "localhost",
+    "port": 27017
+  },
+
+  "mongodbtest": {
+    "user": "spectrum",
+    "password": "UBQ4Lyfe",
+    "database": "spectrum-test",
+    "address": "localhost",
+    "port": 27017
+  }
+}
