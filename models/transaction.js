@@ -14,7 +14,7 @@ var transactionSchema = mongoose.Schema({
   transactionIndex: Number,
   from: {type: String, lowercase: true, index: true},
   to: {type: String, lowercase: true, index: true},
-  contractAddress: {type: String, lowercase: true},
+  contractAddress: {type: String, lowercase: true, index: true},
   logs: Array
 });
 
