@@ -5,7 +5,8 @@ var systemSchema = mongoose.Schema({
   symbol: String,
   supply: String,
   latestBlock: Object,
-  price: String
+  price: String,
+  txnCounts: Array
 });
 
 module.exports = mongoose.model('sysStore', systemSchema);
