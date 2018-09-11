@@ -10,21 +10,31 @@ function exit () {
 
 const DAYS = 14; // 2 weeks
 const SECONDS = 86400; // 1 day
-const NOW = Date.now() / 1000;
+const now = new Date()
+var yesterday = new Date(now.setDate(now.getDate() -1)).toUTCString();
+var arr = yesterday.split(' ');
+arr[4] = '00:00:00'
+const EOD = new Date(arr.join(' ')).getTime() / 1000 // End of Day
 
 var counts = [];
+var dates = [];
 
 db.connect(config.mongodb, function () {
   lib.syncLoop(DAYS, function (loop) {
     var i = loop.iteration();
-    var from = NOW - ((i+1) * SECONDS);
-    var to = NOW - (i * SECONDS);
+    var from = EOD - ((i+1) * SECONDS);
+    var to = EOD - (i * SECONDS);
     Transaction.where('timestamp').gte(from).lte(to).countDocuments(function (err, count) {
       counts.push(count);
+      var date = new Date(to * 1000);
+      dates.push(date.getDate() + '/' + (date.getMonth() + 1))
       loop.next();
     });
   }, function () {
-    db.updateStoreTxnCounts(counts.reverse(), function () {
+    db.updateStoreTxnCounts({
+      data: counts.reverse(),
+      labels: dates.reverse()
+    }, function () {
       exit();
     });
   });
