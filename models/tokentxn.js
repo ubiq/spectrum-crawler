@@ -7,7 +7,7 @@ var tokenTransferSchema = mongoose.Schema({
   from: {type: String, lowercase: true, index: true},
   to: {type: String, lowercase: true, index: true},
   value: String,
-  contract: {type: String, lowercase: true},
+  contract: {type: String, lowercase: true, index: true},
   method: {type: String, lowercase: true}
 });
 
